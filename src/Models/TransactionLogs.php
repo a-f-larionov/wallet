@@ -50,14 +50,14 @@ class TransactionLogs
 
     /**
      * Запрашиваемая сумма транзакции.
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", columnDefinition="integer unsigned")
      * @var int
      */
     private int $sum;
 
     /**
      * Номер валюты согласно ISO 4217
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", columnDefinition="integer unsigned")
      * @var int
      * @see https://ru.wikipedia.org/wiki/ISO_4217
      */
