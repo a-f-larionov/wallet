@@ -17,7 +17,7 @@ class Money
 {
     /**
      * Сырое представление денег..
-     * @Column(type = "integer")
+     * @Column(type = "integer", columnDefinition="integer unsigned")
      * @var $rawSum int
      */
     private int $rawSum;

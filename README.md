@@ -23,6 +23,19 @@
 - currency - валюта, строка `RUB`, `USD` согласно [ISO-4217](https://ru.wikipedia.org/wiki/ISO_4217)
 
 
+### Инструкция по разветрыванию
+
+`git clone https://github.com/a-f-larionov/wallet`
+
+`composer install`
+
+`vendor/bin/doctrine orm:schema-tool:create --force`
+
+настраиваем nginx, проект готов. 
+Можно использовать ссылке из этого документа, они ведут на настроенный проетк.
+
+
+
 ### Life Cycle:
 
 - entry point /public/index.php;

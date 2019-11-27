@@ -16,14 +16,14 @@ class Wallet
 {
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", columnDefinition="integer unsigned")
      * @ORM\GeneratedValue
      * @var int
      */
     private ?int  $id = null;
 
     /**
-     * @ORM\Column(type="integer", unique=true)
+     * @ORM\Column(type="integer", unique=true, columnDefinition="unsigned")
      * @var int
      */
     private int $userId;

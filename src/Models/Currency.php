@@ -28,7 +28,7 @@ class Currency
 
     /**
      * Номер валюты согласно ISO 4217
-     * @Column(type = "integer")
+     * @Column(type = "integer", columnDefinition="integer unsigned")
      * @var int
      */
     private int $num;
