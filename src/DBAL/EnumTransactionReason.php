@@ -14,7 +14,7 @@ class EnumTransactionReason extends Type
 {
     const ENUM_NAME = 'enum_transaction_reason';
     const ENUM_STOCK = 'stock';
-    const ENUM_FUND = 'fund';
+    const ENUM_FUND = 'refund';
 
     /**
      * @var array
