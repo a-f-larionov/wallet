@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Providers\Interfaces\ProviderInterface;
 use App\Services\CurrencyConverter;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\Routing\Router;
 
 /**
  * Class CurrencyConverterProvider
@@ -15,7 +14,7 @@ class CurrencyConverterProvider implements ProviderInterface
 {
     /**
      * @param ContainerInterface $container
-     * @return Router
+     * @return CurrencyConverter
      */
     public static function create(ContainerInterface $container): CurrencyConverter
     {

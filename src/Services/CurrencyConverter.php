@@ -15,8 +15,15 @@ use App\Services\Interfaces\CurrencyConverterInterface;
 class CurrencyConverter implements CurrencyConverterInterface
 {
 
+    /**
+     * @var CurrencyPairRateRepositoryInterface
+     */
     private CurrencyPairRateRepositoryInterface $currencyPairRateRepository;
 
+    /**
+     * CurrencyConverter constructor.
+     * @param CurrencyPairRateRepositoryInterface $currencyPairRateRepository
+     */
     public function __construct(CurrencyPairRateRepositoryInterface $currencyPairRateRepository)
     {
         $this->currencyPairRateRepository = $currencyPairRateRepository;

@@ -6,7 +6,6 @@ use App\Api\CBRFClient;
 use App\Exceptions\UserRequestErrorException;
 use App\Models\Currency;
 use App\Repositories\Interfaces\CurrencyPairRateRepositoryInterface;
-use GuzzleHttp\Client;
 
 /**
  * Class WalletRepository
@@ -15,11 +14,6 @@ use GuzzleHttp\Client;
 class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
 {
     /**
-     * @var Client
-     */
-    private Client $client;
-
-    /**
      * @var CBRFClient
      */
     private CBRFClient $cbrfClient;
@@ -27,11 +21,9 @@ class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
     /**
      * CurrencyPairRateRepository constructor.
      * @param CBRFClient $cbrfClient
-     * @param Client $client
      */
-    public function __construct(CBRFClient $cbrfClient, Client $client)
+    public function __construct(CBRFClient $cbrfClient)
     {
-        $this->client = $client;
         $this->cbrfClient = $cbrfClient;
     }
 
@@ -47,13 +39,8 @@ class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
     {
         $rates = $this->cbrfClient->getRates();
 
-        if ($from->getCode() == 'USD' &&
-            $to->getCode() == 'RUB') {
-            return $rates['USDToRUB'];
-        }
-        if ($from->getCode() == 'RUB' &&
-            $to->getCode() == 'USD') {
-            return $rates['RUBToUSD'];
+        if (isset($rates[$from->getCode() . 'To' . $to->getCode()])) {
+            return $rates[$from->getCode() . 'To' . $to->getCode()];
         }
 
         throw new UserRequestErrorException("Unknown Currency Pair.");
