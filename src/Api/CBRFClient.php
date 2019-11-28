@@ -4,7 +4,9 @@ namespace App\Api;
 
 use App\Exceptions\UserRequestErrorException;
 use GuzzleHttp\Client;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Contracts\Cache\ItemInterface;
 
 /**
  * Class CBRFClient

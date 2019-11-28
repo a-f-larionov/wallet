@@ -16,7 +16,8 @@
     "vlucas/phpdotenv": "^3.6",
     "guzzlehttp/guzzle": "^6.4",
     "ext-json": "*",
-    "ext-memcached": "*"
+    "ext-memcached": "*",
+    "symfony/cache": "^5.0"
   },
   "autoload": {
     "files": [

@@ -33,7 +33,7 @@ class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
      * @param Currency $to
      * @return float
      * //@throws UserRequestErrorException
-     * @todo клиент к СБРФ, Сущность Пар и т.д.
+     * @todo сущность пар, кэширование\или БД.
      */
     public function getFor(Currency $from, Currency $to): float
     {
