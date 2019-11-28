@@ -30,7 +30,7 @@ return [
         'user' => getenv('DB_USER'),
         'password' => getenv('DB_PASSWORD'),
         'dbname' => getenv('DB_NAME'),
-        'echoSQLLog' => false//true//getenv('ECHO_SQL_LOG', true),
+        'echoSQLLog' => false || isset($_GET['sql'])//true//getenv('ECHO_SQL_LOG', true),
     ],
 
     'providers' => [

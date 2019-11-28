@@ -15,7 +15,8 @@
     "doctrine/orm": "^2.7",
     "vlucas/phpdotenv": "^3.6",
     "guzzlehttp/guzzle": "^6.4",
-    "ext-json": "*"
+    "ext-json": "*",
+    "ext-memcached": "*"
   },
   "autoload": {
     "files": [

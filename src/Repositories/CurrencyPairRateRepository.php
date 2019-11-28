@@ -2,12 +2,11 @@
 
 namespace App\Repositories;
 
+use App\Api\CBRFClient;
 use App\Exceptions\UserRequestErrorException;
 use App\Models\Currency;
 use App\Repositories\Interfaces\CurrencyPairRateRepositoryInterface;
 use GuzzleHttp\Client;
-use Symfony\Component\HttpFoundation\Response;
-
 
 /**
  * Class WalletRepository
@@ -20,9 +19,20 @@ class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
      */
     private Client $client;
 
-    public function __construct(Client $client)
+    /**
+     * @var CBRFClient
+     */
+    private CBRFClient $cbrfClient;
+
+    /**
+     * CurrencyPairRateRepository constructor.
+     * @param CBRFClient $cbrfClient
+     * @param Client $client
+     */
+    public function __construct(CBRFClient $cbrfClient, Client $client)
     {
         $this->client = $client;
+        $this->cbrfClient = $cbrfClient;
     }
 
     /**
@@ -31,32 +41,21 @@ class CurrencyPairRateRepository implements CurrencyPairRateRepositoryInterface
      * @param Currency $to
      * @return float
      * //@throws UserRequestErrorException
-     * @todo Тут вобще код надо допеределывать, нужен клиент к СБРФ, Сущность Пар и т.д.
-     * @todo этот код не для чтения :) он просто работает :)
+     * @todo клиент к СБРФ, Сущность Пар и т.д.
      */
     public function getFor(Currency $from, Currency $to): float
     {
-        $data = $this->client->get('https://www.cbr-xml-daily.ru/daily_json.js');
-
-        if ($data->getStatusCode() != Response::HTTP_OK) {
-            throw new UserRequestErrorException("CBR is unreachabled. Try again later.");
-        }
-
-        $USDToRUBRate = json_decode($data
-            ->getBody()
-            ->getContents()
-        )->Valute->USD->Value;
-
-        $RUBToUSD = 1 / $USDToRUBRate;
+        $rates = $this->cbrfClient->getRates();
 
         if ($from->getCode() == 'USD' &&
             $to->getCode() == 'RUB') {
-            return $USDToRUBRate;
+            return $rates['USDToRUB'];
         }
         if ($from->getCode() == 'RUB' &&
             $to->getCode() == 'USD') {
-            return $RUBToUSD;
+            return $rates['RUBToUSD'];
         }
-        throw new UserRequestErrorException("Unknows Currency Pair.");
+
+        throw new UserRequestErrorException("Unknown Currency Pair.");
     }
 }
