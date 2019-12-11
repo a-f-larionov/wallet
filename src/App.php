@@ -71,7 +71,6 @@ class App
         } catch (UserRequestErrorException $e) {
             $response = new JsonResponse(['error' => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         } catch (Exception $e) {
-            //dump($e);
             $response = new Response("Сайт на реконструкции.", Response::HTTP_OK);
             //@todo alert it to telegram\email and so on!
         }
